@@ -425,6 +425,40 @@
 <script src="{{asset('assets/js/demo/chart-area-demo.js')}}"></script>
 <script src="{{asset('assets/js/demo/chart-pie-demo.js')}}"></script>
 
+<script>
+    ClassicEditor
+        .create( document.querySelector('#editor'))
+        .then( editor => {
+            console.log( editor );
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+<script>
+    function tampilkanPreview(gambar, idpreview){
+        var gb = gambar.file;
+        for (var i = 0; i < gb.length; i++) {
+            var gbPriview = gb[i];
+            var imageType = /image.*/;
+            var preview = document.getElementById(idpreview);
+            var reader = new FileReader();
+            if(gbPriview.type.math(imageType)){
+                preview.file = gbPriview;
+                reader.onload = (function (element){
+                    return function (e) {
+                        element.src = e.target.result;
+                    };
+                })(preview);
+                reader.readAsDataURL(gbPriview);
+            }else{
+                alert("Type file tidak sesuai. Khusus image.");
+            }
+        }
+    }
+</script>
+
 </body>
 
 </html>
